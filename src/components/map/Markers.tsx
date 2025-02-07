@@ -1,12 +1,12 @@
 'use client';
 
-import { RestaurantType } from '@/interface';
 import React, { Dispatch, SetStateAction, useCallback, useEffect } from 'react'
 import styles from './Markers.module.scss';
+import { StoreType } from '@/interface';
 
 interface IMarkerProps {
   map: any;
-  storeDatas: any[];
+  storeDatas: StoreType[];
   setCurrentStore: Dispatch<SetStateAction<any>>;
 }
 
