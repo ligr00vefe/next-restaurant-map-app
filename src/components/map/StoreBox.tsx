@@ -7,9 +7,10 @@ import {
   AiOutlineCheck
 } from 'react-icons/ai';
 import { HiOutlineMapPin } from 'react-icons/hi2';
+import { StoreType } from '@/interface';
 
 interface IStoreBoxProps {
-  store: any;
+  store: StoreType | null;
   setStore: Dispatch<SetStateAction<any>>;
 }
 
@@ -25,8 +26,8 @@ const StoreBox = ({
             <div className='flex justify-between items-start'>
               <div className='flex gap-4 items-center'>
                 <Image src={
-                  store?.bizcnd_code_nm 
-                    ? `/images/markers/${store?.bizcnd_code_nm}.png` 
+                  store?.category 
+                    ? `/images/markers/${store?.category}.png` 
                     : "/images/markers/default.png"
                   }
                   width={40}
@@ -34,8 +35,8 @@ const StoreBox = ({
                   alt="아이콘 이미지"
                 />
                 <div>
-                  <div className='font-semibold'>{store?.main_title}</div>
-                  <div className='text-sm'>{store?.title}</div>
+                  <div className='font-semibold'>{store?.name}</div>
+                  <div className='text-sm'>{store?.gugun}</div>
                 </div>
               </div>
               <button type="button" onClick={() => setStore(null)}>
@@ -44,19 +45,19 @@ const StoreBox = ({
             </div>
             <div className="mt-4 flex gap-2 items-center">
                 <HiOutlineMapPin />
-                {store?.addr1}
+                {store?.address}
             </div>     
             <div className="mt-4 flex gap-2 items-center">
                 <AiOutlinePhone />
-                {store?.cntct_tel}
+                {store?.phone}
             </div>     
             <div className="mt-4 flex gap-2 items-center">
                 <AiOutlineCheck />
-                {store?.bizcnd_code_nm}
+                {store?.category}
             </div>  
             <div className="mt-4 flex gap-2 items-center">
                 <AiOutlineInfoCircle />
-                {store?.itemcntnts}
+                {store?.description}
             </div>                   
           </div>
           <div>

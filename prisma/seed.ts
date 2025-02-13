@@ -8,6 +8,7 @@ async function seedData() {
   data?.['DATA']?.map(async (store) => {
 		const storeData = {
 			phone: store?.cntct_tel,
+			gugun: store?.gugun_nm,
 			address: store?.addr1,
 		  lat: store?.lat,
 		  lng: store?.lng,

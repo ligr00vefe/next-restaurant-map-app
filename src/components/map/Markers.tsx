@@ -21,8 +21,8 @@ const Markers = ({
       // 식당 데이터 마커 띄우기
       storeDatas?.map((store) => {
         // 마커이미지 주소  
-        const imageSrc = store?.bizcnd_code_nm
-          ? `/images/markers/${store?.bizcnd_code_nm}.png`
+        const imageSrc = store?.category
+          ? `/images/markers/${store?.category}.png`
           : "/images/markers/default.png";
 
         // 마커이미지의 크기
@@ -53,7 +53,7 @@ const Markers = ({
         marker.setMap(map);
 
         // 마커 커서가 오버되었을 때 마커 위에 표시할 인포윈도우 생성
-        const content = `<div class=${styles.infowindow}>${store?.main_title}</div>`;
+        const content = `<div class=${styles.infowindow}>${store?.name}</div>`;
       
         // 커스텀 오버레이 생성
         const customOverlay = new window.kakao.maps.CustomOverlay({

@@ -1,5 +1,6 @@
 'use client';
 import { StoreType } from '@/interface';
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 
 const StoreListClient = () => {
@@ -7,14 +8,12 @@ const StoreListClient = () => {
   
     useEffect(() => {
       const fetchStores = async () => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/stores`);
-        const data = await res.json();
+        const res = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/stores`);
   
-        setStores(data);
+        setStores(res.data);
       };
-  
       fetchStores();
-    }, []);
+    }, [stores]);
   
   return (
     <div className='px-4 md:max-w-4xl mx-auto py-8'>
@@ -22,10 +21,11 @@ const StoreListClient = () => {
         {stores?.map((store, index) => (
           <li className='flex justify-between gap-x-6 py-5' key={index}>
             <div>
-              <Image src={
-                store?.bizcnd_code_nm 
-                  ? `/images/markers/${store?.bizcnd_code_nm}.png`
-                  : "/images/markers/default.png"
+              <Image 
+                src={
+                  store?.category 
+                    ? `/images/markers/${store?.category}.png`
+                    : "/images/markers/default.png"
                 }
                 width={48}
                 height={48}
@@ -33,20 +33,20 @@ const StoreListClient = () => {
               />
               <div>
                 <div className='text-sm font-semibold leading-9 text-gray-900'>
-                  {store?.main_title}
+                  {store?.name}
                 </div>
                 <div className='mt-1 text-xs truncate font-semibold leading-5 text-gray-500'>
-                  {store?.title}
+                  {store?.gugun}
                 </div>
               </div>
             </div>
             <div className='hidden sm:flex sm:flex-col sm:items-end'>
               <div className='text-sm font-semibold leading-9 text-gray-900'>
-                {store?.addr1}
+                {store?.address}
               </div>
               <div className='mt-1 text-xs truncate font-semibold leading-5 text-gray-500'>
-                {store?.cntct_tel || "번호없음"} | {store?.gugun_nm} | {" "}
-                {store?.bizcnd_code_nm}
+                {store?.phone || "번호없음"} | {store?.gugun} | {" "}
+                {store?.category}
               </div>
             </div>
           </li>

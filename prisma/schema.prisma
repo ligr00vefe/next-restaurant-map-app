@@ -17,11 +17,12 @@ model User {
 model Store {
 	id          Int     @id   @default(autoincrement())
 	phone       String? // cntct_tel
-	address     String  // addr1
-  lat         Int     // lat
-  lng         Int     // lng
-  name        String  // main_title
-  category    String  // bizcnd_code_nm
-  menu        String  // rprsntv_menu
-  description String  // itemcntnts
+	gugun       String? // gugun_nm
+	address     String? // addr1
+  lat         Float?  // lat
+  lng         Float?  // lng
+  name        String? // main_title
+  category    String? // bizcnd_code_nm
+  menu        String? // rprsntv_menu
+  description String? // itemcntnts
 }
