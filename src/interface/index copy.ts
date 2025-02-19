@@ -1,4 +1,4 @@
-export interface StoreType1 {
+export interface IStoreType1 {
   uc_seq: number;
   main_title: string;
   gugun_nm: string;

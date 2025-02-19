@@ -2,11 +2,11 @@
 
 import React, { Dispatch, SetStateAction, useCallback, useEffect } from 'react'
 import styles from './Markers.module.scss';
-import { StoreType } from '@/interface';
+import { IStoreType } from '@/interface';
 
 interface IMarkerProps {
   map: any;
-  storeDatas: StoreType[];
+  storeDatas: IStoreType[];
   setCurrentStore: Dispatch<SetStateAction<any>>;
 }
 

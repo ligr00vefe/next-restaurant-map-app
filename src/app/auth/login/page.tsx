@@ -1,8 +1,10 @@
 import React from 'react'
+import LoginClient from './LoginClient'
+
 
 const LoginPage = () => {
   return (
-    <div>LoginPage</div>
+    <LoginClient />
   )
 }
 

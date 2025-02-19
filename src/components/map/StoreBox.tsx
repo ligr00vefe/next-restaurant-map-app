@@ -7,10 +7,10 @@ import {
   AiOutlineCheck
 } from 'react-icons/ai';
 import { HiOutlineMapPin } from 'react-icons/hi2';
-import { StoreType } from '@/interface';
+import { IStoreType } from '@/interface';
 
 interface IStoreBoxProps {
-  store: StoreType | null;
+  store: IStoreType | null;
   setStore: Dispatch<SetStateAction<any>>;
 }
 

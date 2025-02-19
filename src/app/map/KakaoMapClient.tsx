@@ -3,17 +3,17 @@
 import Map from "@/components/map/Map";
 import Markers from "@/components/map/Markers";
 import StoreBox from "@/components/map/StoreBox";
-import { StoreType } from "@/interface";
+import { IStoreType } from "@/interface";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 
 const KakaoMapClient = () => {
-  const [stores, setStores] = useState<StoreType[]>([]);
+  const [stores, setStores] = useState<IStoreType[]>([]);
 
   useEffect(() => {
     const fetchStores = async () => {
-      const res = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/stores`);
+      const res = await axios('/api/stores');
       setStores(res.data);
     };
     fetchStores();
