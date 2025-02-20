@@ -21,10 +21,10 @@ const NavBtn = (isOpen:INavBtnProps) => {
         <div className={styles['navbar__list--mobile']}>
           <ul>
             <li>
-              <Link href='/stores_infinite' className={styles['navbar__list--item--mobile']}>맛집 목록</Link>
+              <Link href='/stores' className={styles['navbar__list--item--mobile']}>맛집 목록</Link>
             </li>
             <li>
-              <Link href='/stores_infinite/new' className={styles['navbar__list--item--mobile']}>맛집 등록</Link> 
+              <Link href='/stores/new' className={styles['navbar__list--item--mobile']}>맛집 등록</Link> 
             </li>
             <li>
               <Link href='/users/likes' className={styles['navbar__list--item--mobile']}>찜한 가게</Link> 

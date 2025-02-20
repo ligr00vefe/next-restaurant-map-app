@@ -4,22 +4,19 @@ import React, { Dispatch, SetStateAction, useCallback, useEffect } from 'react'
 import styles from './Markers.module.scss';
 import { IStoreType } from '@/interface';
 
-interface IMarkersProps {
+interface IMarkerProps {
   map: any;
-  storeDatas: IStoreType[];
-  setCurrentStore: Dispatch<SetStateAction<any>>;
+  store: IStoreType;
 }
 
-const Markers = ({ 
+const Marker = ({
   map, 
-  storeDatas, 
-  setCurrentStore 
-}: IMarkersProps) => {
+  store, 
+}: IMarkerProps) => {
 
-  const loadKakaoMarkers = useCallback(() => {
-    if (map) {
-      // 식당 데이터 마커 띄우기
-      storeDatas?.map((store) => {
+  const loadKakaoMarker = useCallback(() => {
+    if (map && store) {
+      // 현재 선택한 식당 데이터 하나 마커 띄우기
         // 마커이미지 주소  
         const imageSrc = store?.category
           ? `/images/markers/${store?.category}.png`
@@ -74,22 +71,16 @@ const Markers = ({
             // 마커에 마우스아웃 이벤트가 발생하면 커스텀 오버레이를 제거합니다
             customOverlay.setMap(null);
         });
-
-        // 선택한 가게 저장
-        window.kakao.maps.event.addListener(marker, 'click', function() {
-          setCurrentStore(store);
-        })
-      });
-    }
-  }, [map, setCurrentStore, storeDatas]);
+    };    
+  }, [map, store]);
 
   useEffect(() => {
-    loadKakaoMarkers();
-  }, [loadKakaoMarkers, map]);
+    loadKakaoMarker();
+  }, [loadKakaoMarker, map]);
 
   return (
     <></>
   )
 }
 
-export default Markers
+export default Marker
