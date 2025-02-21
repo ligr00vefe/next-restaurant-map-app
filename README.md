@@ -16,6 +16,7 @@
 ## 🔗 API 및 데이터 출처
 - **지도 API:** [카카오 맵](https://apis.map.kakao.com/)
 - **데이터 출처:** [부산광역시 공공데이터 포털](https://data.busan.go.kr/)
+- **아이콘 출처:** [Flaticon](https://www.flaticon.com/)
 
 ## 📂 주요 기능
 - 카카오 맵을 활용한 부산광역시 식당 목록 출력 및 아이콘 마커 표시
@@ -92,11 +93,9 @@ vercel
 - [Supabase](https://supabase.com/)
 - [Prisma](https://www.prisma.io/)
 - [React Query](https://tanstack.com/query/v5/)
-- [Next-Auth Provider]
-    (Google - https://console.cloud.google.com/apis/credentials)
-    (Naver - https://developers.naver.com/main/)
-    (Kakao - https://developers.kakao.com/)
+- [Next-Auth Google Provider](https://console.cloud.google.com/apis/credentials)
+- [Next-Auth Naver Provider](https://developers.naver.com/main/)
+- [Next-Auth kakao Provider](https://developers.kakao.com/)
 
 ## 📝 라이선스
 이 프로젝트는 MIT 라이선스를 따릅니다.
-- [아이콘 출처](https://www.flaticon.com/)
