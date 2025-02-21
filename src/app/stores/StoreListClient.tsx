@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Loading from '@/components/Loading';
 import {IStoreType } from '@/interface';
 import { useInfiniteQuery } from '@tanstack/react-query';
@@ -8,19 +8,28 @@ import axios from 'axios';
 import Image from 'next/image';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import LoadingBar from '@/components/LoadingBar';
+import SearchFilter from '@/components/SearchFilter';
 
-const StoreListClient = () => {  
-
+const StoreListClient = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const pageRef = useIntersectionObserver(ref as React.RefObject<Element>, {});
   const isPageEnd = !!pageRef?.isIntersecting;
   // console.log('pageRef', pageRef);
+  const [q, setQ] = useState<string | null>(null);
+  const [district, setDistrict] = useState<string | null>(null);
+
+  const searchParams = {
+    q: q,
+    district: district,
+  }
+  // console.log('q: ', q, ', district: ', district);
   
   const fetchRestaurant = async ({ pageParam = 1 }) => {
-    const { data } = await axios('/api/stores_infinite?page=' + pageParam, {
+    const { data } = await axios('/api/stores?page=' + pageParam, {
       params: {
         limit: 10,
         page: pageParam,
+        ...searchParams,
       },
     });
     return data;
@@ -35,7 +44,7 @@ const StoreListClient = () => {
     isLoading,
     isError,
   } = useInfiniteQuery({
-    queryKey: ["stores"],
+    queryKey: ["stores", searchParams],
     queryFn: fetchRestaurant,
     initialPageParam: 1,
     getNextPageParam: (lastPage: any) => {
@@ -71,7 +80,9 @@ const StoreListClient = () => {
   }
   
   return (
-    <div className='px-4 md:max-w-4xl mx-auto py-8'>
+    <div className='px-4 md:max-w-4xl mx-auto pt-14 pb-8'>
+      {/* 검색창 */}
+      <SearchFilter setQ={setQ} setDistrict={setDistrict} />
       <ul role="list" className='divide-y divide-gray-100'>
         {isLoading
           ? <Loading />

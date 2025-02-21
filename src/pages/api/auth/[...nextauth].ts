@@ -26,4 +26,9 @@ export default NextAuth({
 	pages: {
 		signIn: "/auth/login",
 	},
+	session: {
+		strategy: "jwt" as const,
+		maxAge: 60 * 60 * 24, // 하루동안 세션 보관
+		updateAge: 60 * 60 * 2, // 2시간 마다 세션 업데이트
+	}
 });

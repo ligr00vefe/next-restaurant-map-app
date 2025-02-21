@@ -2,6 +2,14 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { IStoreApiResponse, IStoreType } from "@/interface";
 import { PrismaClient } from "@prisma/client";
 
+interface IResponseType {
+  page?: string;
+  limit?: string;
+  q?: string;
+  district?: string;
+  id?: string;
+}
+
 const prisma = new PrismaClient();
 
 export default async function handler(
@@ -10,23 +18,27 @@ export default async function handler(
 ) {
 
   // const page = parseInt(req.query.page as string, 10) || ""; // 요청에서 page 가져오기
-  const {page = '', id }: { page?: string, id?: string } = req.query;
+  const  {page = "", limit = "", q = "", district = "" }: IResponseType = req.query;
   if (page) {
-    const pageSize = 10; // 한 페이지당 10개 아이템
+    const pageSize = limit ? parseInt(limit) : 10; 
     const skipPage = parseInt(page) - 1;
     const count = await prisma.store.count();
   
     
     const stores = await prisma.store.findMany({
+      where: {
+        name: q ? { contains: q } : {},
+        address: district ? { contains: district } : {},
+      },
       orderBy: { id: 'asc' },
-      take: pageSize,
+      take: pageSize, 
       skip: skipPage * pageSize,
     });
   
     // totalPage, data, page, totalCount
   
     res.status(200).json({
-      page: page,
+      page: parseInt(page),
       data: stores,
       totalPage: Math.ceil(count / 10),
       totalCount: count,

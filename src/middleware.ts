@@ -5,8 +5,6 @@ export const config = {
     "/users/mypage", 
     "/stores/new", 
     "/stores/:id/edit",
-    "/stores_infinite/new", 
-    "/stores_infinite/:id/edit",
     "/users/likes",
   ] 
 }

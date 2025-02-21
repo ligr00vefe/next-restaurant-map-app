@@ -44,7 +44,7 @@ const LoginClient = () => {
             </button>
             <button 
               className='text-black flex gap-4 bg-[#fef01b] hover:bg-[#fef01b]/90 font-medium rounded-lg w-full px-5 py-4 text-center items-center justify-center'
-              onClick={() => signIn('kakao', { callbackUrl: '/stores_infinite' })} 
+              onClick={() => signIn('kakao', { callbackUrl: '/stores' })} 
             >
               <RiKakaoTalkFill className='w-6 h-6' />
               Sign in with Kakao

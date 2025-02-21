@@ -24,6 +24,9 @@ const NavItem = () => {
           <Link href='/users/likes' className={styles['navbar__list--item']}>찜한 가게</Link> 
         </li>       
         <li>
+          <Link href='/users/mypage' className={styles['navbar__list--item']}>마이페이지</Link> 
+        </li>       
+        <li>
           {status === 'authenticated' ? (
             <button type='button' onClick={() => signOut()}>로그아웃</button>
           ): (
