@@ -1,4 +1,3 @@
-import React, { Dispatch, SetStateAction } from 'react'
 import Image from 'next/image';
 import { 
   AiOutlineClose, 
@@ -7,20 +6,12 @@ import {
   AiOutlineCheck
 } from 'react-icons/ai';
 import { HiOutlineMapPin } from 'react-icons/hi2';
-import { IStoreType } from '@/interface';
 import { useRouter } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { currentStoreState } from '@/atom';
 
-interface IStoreBoxProps {
-  store: IStoreType | null;
-  setStore: Dispatch<SetStateAction<any>>;
-}
-
-const StoreBox = ({
-  store, 
-  setStore
-}: IStoreBoxProps) => {
+const StoreBox = () => {
+  const [store, setStore ] = useRecoilState(currentStoreState);
   const router = useRouter();
 
   return (

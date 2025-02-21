@@ -1,20 +1,14 @@
 'use client';
 
-import React, { Dispatch, SetStateAction, useCallback, useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import styles from './Markers.module.scss';
 import { IStoreType } from '@/interface';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { currentStoreState, mapState } from '@/atom';
 
-interface IMarkersProps {
-  map: any;
-  storeDatas: IStoreType[];
-  setCurrentStore: Dispatch<SetStateAction<any>>;
-}
-
-const Markers = ({ 
-  map, 
-  storeDatas, 
-  setCurrentStore 
-}: IMarkersProps) => {
+const Markers = ({ storeDatas }: { storeDatas: IStoreType[]}) => {
+  const map = useRecoilValue(mapState);
+  const setCurrentStore = useSetRecoilState(currentStoreState);
 
   const loadKakaoMarkers = useCallback(() => {
     if (map) {

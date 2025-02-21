@@ -1,20 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import "./globals.css";
 import Navbar from "@/layouts/navbar/Navbar";
+import RecoilRootProvider from "@/provider/RecoilRootProvider";
 import QueryProvider from "@/provider/QueryProvider";
 import SessionProviderWrapper from "@/provider/SessionProviderWrapper";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,16 +18,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <QueryProvider>
-          <SessionProviderWrapper>
-            <Navbar />
-            {children}
-            <ReactQueryDevtools />
-          </SessionProviderWrapper>          
-        </QueryProvider>
+      <body>
+        <RecoilRootProvider>
+          <QueryProvider>
+            <SessionProviderWrapper>
+              <Navbar />
+              {children}
+              <ReactQueryDevtools />
+            </SessionProviderWrapper>          
+          </QueryProvider>
+        </RecoilRootProvider>        
       </body>
     </html>
   );

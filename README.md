@@ -1,7 +1,7 @@
 # 부산 식당 목록 앱
 
 ## 📌 프로젝트 개요
-부산광역시 공공데이터 포털에서 제공하는 데이터를 활용하여, 카카오 맵을 기반으로 부산 식당 목록을 출력하는 웹 애플리케이션입니다.
+부산광역시 공공데이터 포털에서 제공하는 데이터를 활용하여, 카카오 맵을 기반으로 부산 식당 목록을 출력하는 웹 애플리케이션.
 
 ## 🚀 기술 스택
 - **프레임워크:** Next.js
@@ -12,6 +12,7 @@
 - **API 통신:** Axios
 - **지도:** 카카오 맵 API
 - **데이터 상태관리:** React Query (TanStack Query) - 무한 스크롤 구현
+- **전역 상태 관리:** Recoil
 
 ## 🔗 API 및 데이터 출처
 - **지도 API:** [카카오 맵](https://apis.map.kakao.com/)
@@ -40,7 +41,7 @@ yarn install
 ```
 
 ### 3. 환경 변수 설정
-`.env.local` 파일을 생성하고, 아래 내용을 추가하세요.
+`.env.local` 파일을 생성하고, 아래 내용을 추가.
 ```env
 NEXT_PUBLIC_KAKAO_MAP_KEY=your_kakao_api_key
 NEXT_PUBLIC_API_URL=http://localhost:3000
@@ -76,15 +77,15 @@ npm run dev
 yarn dev
 ```
 
-브라우저에서 [http://localhost:3000](http://localhost:3000)로 접속하여 실행 결과를 확인하세요.
+브라우저에서 [http://localhost:3000](http://localhost:3000)로 접속하여 실행 결과를 확인.
 
 ## 🚀 배포
-배포는 Vercel을 사용하여 쉽게 진행할 수 있습니다.
+배포는 Vercel을 사용하여 쉽게 진행할 수 있음.
 ```bash
 npm run build
 vercel
 ```
-[Next.js 배포 가이드](https://nextjs.org/docs/app/building-your-application/deploying)를 참고하세요.
+[Next.js 배포 가이드](https://nextjs.org/docs/app/building-your-application/deploying)를 참고.
 
 ## 📚 참고 자료
 - [Next.js 공식 문서](https://nextjs.org/docs)
@@ -96,6 +97,25 @@ vercel
 - [Next-Auth Google Provider](https://console.cloud.google.com/apis/credentials)
 - [Next-Auth Naver Provider](https://developers.naver.com/main/)
 - [Next-Auth kakao Provider](https://developers.kakao.com/)
+
+🐞 이슈 및 해결 방법
+
+⚠️ Next.js, React, Recoil 버전 충돌로 인한 버전 고정 설치 권장
+
+🔧 다음 버전으로 설치 권장:
+
+"next": "^14.1.1",
+"react": "^18.2.0",
+"react-dom": "^18.2.0",
+"recoil": "^0.7.7"
+
+⚠️ Next.js 다운그레이드로 인한 Turbopack 사용 불가
+
+🔧 Next.js를 낮춘 경우 Turbopack이 정상적으로 작동하지 않을 수 있음. Webpack을 기본 번들러로 사용.
+
+⚠️ 'ReactCurrentDispatcher' 오류 (Turbopack 충돌 관련)
+
+🔧 해당 오류가 발생하는 경우, Next.js 버전을 업그레이드하여 최신 패치 적용을 권장.
 
 ## 📝 라이선스
 이 프로젝트는 MIT 라이선스를 따릅니다.

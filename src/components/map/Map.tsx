@@ -1,6 +1,10 @@
+'use client';
+
 /*global kakao*/
-import React, { Dispatch, SetStateAction } from 'react'
 import Script from "next/script";
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { locationState, mapState } from '@/atom';
+import { ILocationType } from "@/interface";
 
 declare global {
   interface Window {
@@ -8,30 +12,22 @@ declare global {
   }
 }
 
-interface IMapProps {
-  setMap: Dispatch<SetStateAction<any>>;
-  lat?: number | null;
-  lng?: number | null;
-  zoom?: number;
-}
-
-const DEFAULT_LAT = 35.176448;
-const DEFAULT_LNG = 129.079661;
-const DEFAULT_ZOOM = 3;
-
-const Map = ({ 
-  setMap, 
+const Map = ({   
   lat, 
   lng, 
   zoom 
-}: IMapProps) => {
+}: ILocationType) => {
+  // recoil 전역 변수
+  const setMap = useSetRecoilState(mapState);
+  const location = useRecoilValue(locationState);
+  
   const loadKakaoMap = () => {
     // kakao map 로드
     window.kakao.maps.load(() => {
       const mapContainer = document.getElementById("map");
       const mapOption = {
-        center: new window.kakao.maps.LatLng(lat ?? DEFAULT_LAT, lng ?? DEFAULT_LNG),
-        level: zoom ?? DEFAULT_ZOOM,
+        center: new window.kakao.maps.LatLng(lat ?? location.lat, lng ?? location.lng),
+        level: zoom ?? location.zoom,
       };
       const map = new window.kakao.maps.Map(mapContainer, mapOption);      
     

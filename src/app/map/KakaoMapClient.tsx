@@ -19,16 +19,11 @@ const KakaoMapClient = () => {
     fetchStores();
   }, []);
 
-  const [map, setMap] = useState(null);
-  const [currentStore, setCurrentStore] = useState(null);
-  // console.log('stores: ', stores);
-  // console.log('currentStore: ', currentStore);
-
   return (
     <>
-      <Map setMap={setMap} />
-      <Markers storeDatas={stores} map={map} setCurrentStore={setCurrentStore} />
-      <StoreBox store={currentStore} setStore={setCurrentStore} />
+      <Map />
+      <Markers storeDatas={stores} />
+      <StoreBox />
     </>
   )
 }

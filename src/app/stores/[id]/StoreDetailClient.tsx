@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react'
+import React from 'react'
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 import axios from 'axios';
@@ -11,10 +11,9 @@ import Marker from '@/components/map/Marker';
 
 const StoreDetailClient = () => {
   const pathname = usePathname();
-  const [map, setMap] = useState(null);
 
   // 슬래시(`/`)를 기준으로 분리하여 slug 값 추출
-  const segments = pathname.split('/').filter(Boolean);
+  const segments = pathname!.split('/').filter(Boolean);
   const slug = segments[segments.length - 1];
 
   // console.log('pathname: ' + pathname); 
@@ -131,8 +130,8 @@ const StoreDetailClient = () => {
       </div>
       {isSuccess && (
         <div className='overflow-hidden w-full mb-20 max-w-5xl mx-auto max-h-[600px]'>
-          <Map setMap={setMap} lat={store?.lat} lng={store?.lng} zoom={1} />
-          <Marker map={map} store={store} />
+          <Map lat={store?.lat} lng={store?.lng} zoom={1} />
+          <Marker store={store} />
         </div>
       )}
     </>
