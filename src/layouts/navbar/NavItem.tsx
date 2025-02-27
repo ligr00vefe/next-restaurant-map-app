@@ -9,7 +9,7 @@ const NavItem = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { data, status } = useSession();
-  console.log(data, status);
+  // console.log(data, status);
 
   return (
     <>

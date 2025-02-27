@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import "./globals.css";
 import Navbar from "@/layouts/navbar/Navbar";
-import RecoilRootProvider from "@/provider/RecoilRootProvider";
-import QueryProvider from "@/provider/QueryProvider";
-import SessionProviderWrapper from "@/provider/SessionProviderWrapper";
+import RecoilRootProvider from "@/providers/RecoilRootProvider";
+import QueryProvider from "@/providers/QueryProvider";
+import SessionProviderWrapper from "@/providers/SessionProviderWrapper";
+import ToastProvider from "@/providers/ToastProvider";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,6 +24,7 @@ export default function RootLayout({
         <RecoilRootProvider>
           <QueryProvider>
             <SessionProviderWrapper>
+              <ToastProvider />
               <Navbar />
               {children}
               <ReactQueryDevtools />

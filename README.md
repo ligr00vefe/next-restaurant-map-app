@@ -103,19 +103,22 @@ vercel
 ⚠️ Next.js, React, Recoil 버전 충돌로 인한 버전 고정 설치 권장
 
 🔧 다음 버전으로 설치 권장:
-
+```bash
 "next": "^14.1.1",
 "react": "^18.2.0",
 "react-dom": "^18.2.0",
 "recoil": "^0.7.7"
+```
 
 ⚠️ Next.js 다운그레이드로 인한 Turbopack 사용 불가
 
 🔧 Next.js를 낮춘 경우 Turbopack이 정상적으로 작동하지 않을 수 있음. Webpack을 기본 번들러로 사용.
 
+
 ⚠️ 'ReactCurrentDispatcher' 오류 (Turbopack 충돌 관련)
 
-🔧 해당 오류가 발생하는 경우, Next.js 버전을 업그레이드하여 최신 패치 적용을 권장.
+🔧 해당 오류가 해결되었을 경우에만, Next.js 버전을 업그레이드하여 최신 패치 적용을 권장.
+
 
 ## 📝 라이선스
 이 프로젝트는 MIT 라이선스를 따릅니다.

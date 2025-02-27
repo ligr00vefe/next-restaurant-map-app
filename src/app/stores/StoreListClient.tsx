@@ -1,26 +1,29 @@
 'use client';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import Loading from '@/components/Loading';
+import Loading from '@/components/loading/Loading';
 import {IStoreType } from '@/interface';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import Image from 'next/image';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
-import LoadingBar from '@/components/LoadingBar';
-import SearchFilter from '@/components/SearchFilter';
+import LoadingBar from '@/components/loading/LoadingBar';
+import SearchFilter from '@/components/search/SearchFilter';
+import { useRouter } from 'next/navigation';
+import { useRecoilValue } from 'recoil';
+import { searchState } from '@/atom';
 
 const StoreListClient = () => {
+  const router = useRouter();
   const ref = useRef<HTMLDivElement | null>(null);
   const pageRef = useIntersectionObserver(ref as React.RefObject<Element>, {});
   const isPageEnd = !!pageRef?.isIntersecting;
   // console.log('pageRef', pageRef);
-  const [q, setQ] = useState<string | null>(null);
-  const [district, setDistrict] = useState<string | null>(null);
+  const searchValue = useRecoilValue(searchState);
 
   const searchParams = {
-    q: q,
-    district: district,
+    q: searchValue?.q,
+    district: searchValue?.district,
   }
   // console.log('q: ', q, ', district: ', district);
   
@@ -82,14 +85,14 @@ const StoreListClient = () => {
   return (
     <div className='px-4 md:max-w-4xl mx-auto pt-14 pb-8'>
       {/* 검색창 */}
-      <SearchFilter setQ={setQ} setDistrict={setDistrict} />
+      <SearchFilter />
       <ul role="list" className='divide-y divide-gray-100'>
         {isLoading
           ? <Loading />
           : stores?.pages?.map((page, index) => (
             <React.Fragment key={index}>
               {page.data.map((store: IStoreType, i: number) => (
-                <li className='flex justify-between gap-x-6 py-5' key={i}>
+                <li className='flex justify-between gap-x-6 py-5 cursor-pointer' key={i} onClick={() => router.push(`/stores/${store.id}`)}>
                   <div>
                     <Image 
                       src={

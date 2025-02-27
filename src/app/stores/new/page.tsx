@@ -1,8 +1,9 @@
 import React from 'react'
+import StoreNewClient from './StoreNewClient'
 
 const StoreAddPage = () => {
   return (
-    <div>StoreAddPage</div>
+    <StoreNewClient />
   )
 }
 

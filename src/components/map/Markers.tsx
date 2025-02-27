@@ -3,12 +3,13 @@
 import { useCallback, useEffect } from 'react'
 import styles from './Markers.module.scss';
 import { IStoreType } from '@/interface';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { currentStoreState, mapState } from '@/atom';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { currentStoreState, locationState, mapState } from '@/atom';
 
 const Markers = ({ storeDatas }: { storeDatas: IStoreType[]}) => {
   const map = useRecoilValue(mapState);
   const setCurrentStore = useSetRecoilState(currentStoreState);
+  const [location, setLocation] = useRecoilState(locationState);
 
   const loadKakaoMarkers = useCallback(() => {
     if (map) {
@@ -72,10 +73,16 @@ const Markers = ({ storeDatas }: { storeDatas: IStoreType[]}) => {
         // 선택한 가게 저장
         window.kakao.maps.event.addListener(marker, 'click', function() {
           setCurrentStore(store);
+          setLocation({
+            ...location,
+            lat: store?.lat,
+            lng: store?.lng,
+          });
         })
       });
     }
-  }, [map, setCurrentStore, storeDatas]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [map, storeDatas]);
 
   useEffect(() => {
     loadKakaoMarkers();

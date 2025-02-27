@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 import axios from 'axios';
 import { IStoreType } from '@/interface';
-import LoadingBar from '@/components/LoadingBar';
+import LoadingBar from '@/components/loading/LoadingBar';
 import Map from '@/components/map/Map';
 import Marker from '@/components/map/Marker';
 
@@ -38,7 +38,7 @@ const StoreDetailClient = () => {
     refetchOnWindowFocus: false,
   });
 
-  console.log(store, isFetching, isError);
+  // console.log(store, isFetching, isError);
 
   if (isError) {
     return <div className='w-full h-screen mx-auth pt-[10%] text-red-500 text-center font-semibold'>다시 시도해주세요.</div>;

@@ -11,10 +11,10 @@ const StoreDetailClient = () => {
   const segments = pathname.split('/').filter(Boolean); // ['', 'blog', 'hello-world']
   const slug = segments[segments.length - 1];
 
-  console.log('router: ' + router);
-  console.log('pathname: ' + pathname); 
-  console.log('segments: ' + segments); 
-  console.log('slug: ' + slug); 
+  // console.log('router: ' + router);
+  // console.log('pathname: ' + pathname); 
+  // console.log('segments: ' + segments); 
+  // console.log('slug: ' + slug); 
   return (
     <div>StoreDetailClient</div>
   )

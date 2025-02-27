@@ -24,6 +24,11 @@ export interface ILocationType {
   zoom?: number;
 }
 
+export interface ISearchType {
+  q?: string;
+  district?: string;
+}
+
 
 
 export interface IStoreAllType {

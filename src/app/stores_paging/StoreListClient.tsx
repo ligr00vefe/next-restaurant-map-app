@@ -1,5 +1,5 @@
 'use client';
-import Loading from '@/components/Loading';
+import Loading from '@/components/loading/Loading';
 import Pagination from '@/components/Pagination';
 import { IStoreApiResponse } from '@/interface';
 import { useQuery } from '@tanstack/react-query';

@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client';
 import * as data from '../src/data/restaurant_data.json';
-
-const prisma = new PrismaClient();
+import { prisma } from '@/db';
 
 async function seedData() {
 	// seed 코드 작성
@@ -20,7 +18,7 @@ async function seedData() {
 		const result = await prisma.store.create({
 			data: storeData
 		});
-		console.log(result);
+		// console.log('seed result: ', result);
 	});
 }
 
@@ -30,7 +28,7 @@ async function main() {
 
 main()
 	.catch((e) => {
-		console.log(e);
+		console.log('seed error: ', e);
 		process.exit(1);
 	})
 	.finally(() => {

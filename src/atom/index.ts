@@ -1,4 +1,4 @@
-import { ILocationType, IStoreType } from '@/interface';
+import { ILocationType, ISearchType, IStoreType } from '@/interface';
 import { atom } from 'recoil';
 
 const DEFAULT_LAT = 35.176448;
@@ -25,3 +25,8 @@ export const locationState = atom<ILocationType>({
   },
   dangerouslyAllowMutability: true,
 })
+
+export const searchState = atom<ISearchType | null>({
+  key: 'search',
+  default: null,
+});
