@@ -56,12 +56,16 @@
     // background: darkblue;
     // color: white;
     // height: 100vh;
-    @apply fixed w-full text-white h-screen top-[52px] bg-blue-800;
+    @apply fixed w-full text-white h-screen top-[52px] bg-blue-800 z-[100];
   }
   
   .navbar__list {
     // display: none;
     @apply hidden;
+  }
+
+  .navbar__button {
+    @apply block px-[18px] py-0;
   }
 
   .navbar__list--mobile {
@@ -70,7 +74,7 @@
     // gap: 16px;
     // align-items: start;
     // padding: 24px 18px;
-    @apply flex flex-col gap-4 px-[18px] py-[24px];
+    @apply flex flex-col gap-4 px-[18px] py-6;
   }
   
   .navbar__list--item--mobile {
@@ -81,11 +85,5 @@
       // color: darkgray;
       @apply text-gray-600;
     }
-  }
-
-  .navbar--mobile {
-    // display: block;
-    // padding: 0 18px;
-    @apply block px-[18px] py-0;
   }
 }

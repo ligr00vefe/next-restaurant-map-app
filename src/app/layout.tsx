@@ -25,8 +25,10 @@ export default function RootLayout({
           <QueryProvider>
             <SessionProviderWrapper>
               <ToastProvider />
-              <Navbar />
-              {children}
+              <div className="layout">
+                <Navbar />
+                {children}
+              </div>              
               <ReactQueryDevtools />
             </SessionProviderWrapper>          
           </QueryProvider>

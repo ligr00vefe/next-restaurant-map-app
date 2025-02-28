@@ -1,19 +1,16 @@
 'use client';
 import Link from 'next/link'
-import React, { useState } from 'react'
-import NavBtn from './NavBtn';
+import React from 'react'
 import styles from './Navbar.module.scss';
 import { useSession, signOut } from 'next-auth/react';
 
 const NavItem = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
   const { data, status } = useSession();
   // console.log(data, status);
 
   return (
     <>
-      <ul className={styles['navbar__list--items']}>
+      <ul>
         <li>
           <Link href='/map' className={styles['navbar__list--item']}>맛집 지도</Link>
         </li>
@@ -37,11 +34,6 @@ const NavItem = () => {
           )}
         </li>
       </ul>
-
-      {/* mobile button */}
-      <div className={styles['navbar__button']}>
-        <NavBtn isOpen={isOpen} />
-      </div>
     </>
   )
 }

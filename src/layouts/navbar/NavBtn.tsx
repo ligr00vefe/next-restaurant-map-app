@@ -1,25 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BiMenu } from  'react-icons/bi';
 import { AiOutlineClose } from  'react-icons/ai';
 import Link from 'next/link';
 import styles from './Navbar.module.scss';
 import { useSession, signOut } from 'next-auth/react';
 
-interface INavBtnProps {
-  isOpen: boolean;
-}
-
-const NavBtn = (isOpen:INavBtnProps) => {
+const NavBtn = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const { data, status } = useSession();
   
   return (
     <>
-      {isOpen ? <AiOutlineClose /> : <BiMenu />};
+      <div
+          role="presentation"
+          className={styles['navbar__button']}
+          onClick={() => setIsOpen((val) => !val)}
+        >
+          {isOpen ? <AiOutlineClose /> : <BiMenu />}
+      </div>
 
       {isOpen && (
-        <div className={styles['navbar__list--mobile']}>
-          <ul>
+        <div className={styles['navbar--mobile']}>
+          <ul className={styles['navbar__list--mobile']}>
             <li>
               <Link href='/map' className={styles['navbar__list--item--mobile']}>맛집 지도</Link>
             </li>
@@ -31,6 +34,9 @@ const NavBtn = (isOpen:INavBtnProps) => {
             </li>
             <li>
               <Link href='/users/likes' className={styles['navbar__list--item--mobile']}>찜한 가게</Link> 
+            </li>
+            <li>
+              <Link href='/users/mypage' className={styles['navbar__list--item--mobile']}>마이페이지</Link> 
             </li>
             <li>
               {status === 'authenticated' ? (
