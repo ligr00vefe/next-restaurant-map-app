@@ -93,8 +93,6 @@ export default async function handler(
         skip: skipPage * pageSize,
       });
     
-      // totalPage, data, page, totalCount
-    
       res.status(200).json({
         page: parseInt(page),
         data: stores,

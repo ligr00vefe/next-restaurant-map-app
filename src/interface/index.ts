@@ -16,6 +16,7 @@ export interface ILikeType {
   id: number;
   storeId: number;
   userId: number;
+  store?: IStoreType;
 }
 
 export interface ILikeApiResponse {

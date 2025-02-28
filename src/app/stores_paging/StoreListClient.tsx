@@ -5,9 +5,11 @@ import { IStoreApiResponse } from '@/interface';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 
 const StoreListClient = () => {  
-  const page = new URLSearchParams(window.location.search).get("page") || "1";
+  const searchParams = useSearchParams();
+  const page = searchParams?.get("page") || "1";
 
   async function fetchRestaurants() {
     const { data } = await axios.get(`/api/stores?page=${page}`);  
@@ -64,7 +66,7 @@ const StoreListClient = () => {
             </li>
         ))}
       </ul>
-      {stores?.totalPage && <Pagination totalPage={stores?.totalPage} page={page} />}    
+      {stores?.totalPage && stores?.totalPage > 0 && <Pagination totalPage={stores?.totalPage} page={page} pathname='/stores_paging' />}    
     </div>
   )
 }

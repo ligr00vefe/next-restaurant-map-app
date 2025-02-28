@@ -12,6 +12,7 @@ import SearchFilter from '@/components/search/SearchFilter';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import { searchState } from '@/atom';
+import StoreList from '@/components/store/StoreList';
 
 const StoreListClient = () => {
   const router = useRouter();
@@ -92,41 +93,9 @@ const StoreListClient = () => {
           : stores?.pages?.map((page, index) => (
             <React.Fragment key={index}>
               {page.data.map((store: IStoreType, i: number) => (
-                <li className='flex justify-between gap-x-6 py-5 cursor-pointer' key={i} onClick={() => router.push(`/stores/${store.id}`)}>
-                  <div>
-                    <Image 
-                      src={
-                        store?.category 
-                          ? `/images/markers/${store?.category}.png`
-                          : "/images/markers/default.png"
-                      }
-                      width={48}
-                      height={48}
-                      alt="아이콘 이미지"
-                    />
-                    <div>
-                      <div className='text-sm font-semibold leading-9 text-gray-900'>
-                        {store?.name}
-                      </div>
-                      <div className='mt-1 text-xs truncate font-semibold leading-5 text-gray-500'>
-                        {store?.menu}
-                      </div>
-                    </div>
-                  </div>
-                  <div className='hidden sm:flex sm:flex-col sm:items-end'>
-                    <div className='text-sm font-semibold leading-9 text-gray-900'>
-                      {store?.address}
-                    </div>
-                    <div className='mt-1 text-xs truncate font-semibold leading-5 text-gray-500'>
-                      {store?.phone || "번호없음"} | {store?.gugun} | {" "}
-                      {store?.category}
-                    </div>
-                  </div>
-                </li>
-              ))}
-              
-            </React.Fragment>
-            
+                <StoreList store={store} i={i} key={i} />
+              ))}              
+            </React.Fragment>            
         ))}
       </ul>
       {(isFetching || hasNextPage || isFetchingNextPage) && <LoadingBar />}

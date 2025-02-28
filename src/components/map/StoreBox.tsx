@@ -40,13 +40,13 @@ const StoreBox = () => {
                 <AiOutlineClose />
               </button>       
             </div>
-            <div className="mt-4 flex gap-2 items-center">
-                <HiOutlineMapPin />
-                {store?.address || '주소가 없습니다.'}
-            </div>    
-             
-            <Like storeId={store.id} className="" />
-
+            <div className="flex justify-between gap-4">
+              <div className="mt-4 flex gap-2 items-center">
+                  <HiOutlineMapPin />
+                  {store?.address || '주소가 없습니다.'}
+              </div>  
+              <Like storeId={store.id} className="" />
+            </div>                       
             <div className="mt-4 flex gap-2 items-center">
                 <AiOutlinePhone />
                 {store?.phone}

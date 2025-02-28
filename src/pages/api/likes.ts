@@ -4,6 +4,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { ILikeApiResponse, ILikeType } from "@/interface";
 
+interface IResponseType {
+  page?: string;
+  limit?: string;
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ILikeType | ILikeApiResponse>
@@ -48,18 +53,28 @@ export default async function handler(
     }    
   } else {
     // GET method 처리
+    const { page = "1", limit = "10" }: IResponseType = req.query;
+    const pageSize = limit ? parseInt(limit) : 10; 
+    const skipPage = parseInt(page) - 1;
+    const count = await prisma.like.count();
+
     const likes = await prisma.like.findMany({
-      orderBy: { createdAt: 'desc' },
       where: {
-        userId: session.user.id
+        userId: Number(session.user.id),
       },
       include: {
         store: true,
       },
+      orderBy: { createdAt: 'desc' },
+      take: pageSize, 
+      skip: skipPage * pageSize,
     });
 
     return res.status(200).json({
       data: likes,
+      page: parseInt(page),
+      totalPage: Math.ceil(count / 10),
+      totalCount: count,
     });
   }
 }
