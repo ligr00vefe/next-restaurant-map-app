@@ -2,16 +2,22 @@
 
 import React from 'react'
 import { useQuery } from '@tanstack/react-query';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { IStoreType } from '@/interface';
 import LoadingBar from '@/components/loading/LoadingBar';
 import Map from '@/components/map/Map';
 import Marker from '@/components/map/Marker';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { toast } from 'react-toastify';
+import Like from '@/components/like/Like';
 
 const StoreDetailClient = () => {
+  const router = useRouter();
   const pathname = usePathname();
-
+  const { status } = useSession();
+  
   // 슬래시(`/`)를 기준으로 분리하여 slug 값 추출
   const segments = pathname!.split('/').filter(Boolean);
   const slug = segments[segments.length - 1];
@@ -30,15 +36,34 @@ const StoreDetailClient = () => {
     isFetching, 
     isSuccess,
     isError,
-  } = useQuery({
+  } = useQuery<IStoreType>({
     queryKey: [`store-${slug}`],
     queryFn: fetchStore,
     enabled: !!slug,
     // 새로고침을 해도 페이지를 리페칭하지 않음
     refetchOnWindowFocus: false,
   });
-
   // console.log(store, isFetching, isError);
+
+  const handleDelete = async () => {
+    const confirm = window.confirm('해당 식당 정보를 삭제하시겠습니까?');
+
+    if (confirm && store) {
+      try {
+        const result = await axios.delete(`/api/stores?id=${store?.id}`);
+      
+        if (result.status === 200) {
+          toast.success('식당 정보가 삭제되었습니다.')
+          router.replace('/stores');
+        }else {
+          toast.error('다시 시도해주세요.')
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error('다시 시도해주세요.')
+      } 
+    }    
+  }
 
   if (isError) {
     return <div className='w-full h-screen mx-auth pt-[10%] text-red-500 text-center font-semibold'>다시 시도해주세요.</div>;
@@ -50,11 +75,24 @@ const StoreDetailClient = () => {
 
   return (
     <>
-      <div className='max-w-5xl mx-auto px-4 py-8'>
-        <div className="px-4 sm:px-0">
-          <h3 className="text-base/7 font-semibold text-gray-900">{store?.name}</h3>
-          <p className="mt-1 max-w-2xl text-sm/6 text-gray-500">{store?.address}</p>
-        </div>
+      <div className='max-w-5xl mx-auto px-4 pt-14 pb-8'>
+        <div className='md:flex justify-between items-center py-4 md:py-0'>
+          <div className="px-4 sm:px-0">
+            <h3 className="text-base/7 font-semibold text-gray-900">{store?.name}</h3>
+            <p className="mt-1 max-w-2xl text-sm/6 text-gray-500">{store?.address}</p>
+          </div>
+          {status === 'authenticated' && store && (
+            <div className='flex items-center gap-4 px-4 py-3'>
+              <Like storeId={store.id} className="" />
+              <Link href={`/stores/${store?.id}/edit`} className='underline hover:text-gray-400 text-sm'>수정</Link>
+              <button 
+                type='button' 
+                className='underline hover:text-gray-400 text-sm'
+                onClick={handleDelete}
+              >삭제</button>
+            </div>
+          )}          
+        </div>       
         <div className="mt-6 border-t border-gray-100">
           <dl className="divide-y divide-gray-100">
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -86,43 +124,10 @@ const StoreDetailClient = () => {
               <dt className="text-sm/6 font-medium text-gray-900">주요 메뉴</dt>
               <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">{store?.menu}</dd>
             </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <div className="px-4 pt-6 pb-14 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm/6 font-medium text-gray-900">상세 설명</dt>
               <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
                 {store?.description}
-              </dd>
-            </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-sm/6 font-medium text-gray-900">Attachments</dt>
-              <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                <ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">
-                  <li className="flex items-center justify-between py-4 pr-5 pl-4 text-sm/6">
-                    <div className="flex w-0 flex-1 items-center">
-                      <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                        <span className="truncate font-medium">resume_back_end_developer.pdf</span>
-                        <span className="shrink-0 text-gray-400">2.4mb</span>
-                      </div>
-                    </div>
-                    <div className="ml-4 shrink-0">
-                      <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                        Download
-                      </a>
-                    </div>
-                  </li>
-                  <li className="flex items-center justify-between py-4 pr-5 pl-4 text-sm/6">
-                    <div className="flex w-0 flex-1 items-center">
-                      <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                        <span className="truncate font-medium">coverletter_back_end_developer.pdf</span>
-                        <span className="shrink-0 text-gray-400">4.5mb</span>
-                      </div>
-                    </div>
-                    <div className="ml-4 shrink-0">
-                      <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                        Download
-                      </a>
-                    </div>
-                  </li>
-                </ul>
               </dd>
             </div>
           </dl>

@@ -14,10 +14,10 @@ model User {
 	name          String?
   emailVerified DateTime? @map("email_verified")
   image         String?
+  
   accounts      Account[]
   sessions      Session[]
-
-  @@map("user")
+  likes         Like[]
 }
 
 model Store {
@@ -31,10 +31,21 @@ model Store {
   category    String? // bizcnd_code_nm
   menu        String? // rprsntv_menu
   description String? // itemcntnts
-
-  @@map("store")
+  
+  likes       Like[]
 }
 
+model Like {
+  id          Int      @id   @default(autoincrement())
+	storeId     Int 
+	userId      Int 
+	createdAt   DateTime @default(now()) 
+
+	store       Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+	user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, storeId])
+}
 model Account {
   id                            String  @id @default(cuid())
   userId                        Int  @map("user_id")
@@ -53,7 +64,6 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
   @@unique([provider, providerAccountId])
-  @@map("accounts")
 }
  
 model Session {
@@ -61,9 +71,8 @@ model Session {
   sessionToken String   @unique @map("session_token")
   userId       Int   @map("user_id")
   expires      DateTime
+
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
-  @@map("sessions")
 }
  
 model VerificationToken {
@@ -72,5 +81,4 @@ model VerificationToken {
   expires    DateTime
  
   @@unique([identifier, token])
-  @@map("verification_tokens")
 }

@@ -1,12 +1,12 @@
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@/db';
+
 import GoogleProvider from 'next-auth/providers/google';
 import NaverProvider from 'next-auth/providers/naver';
 import KakaoProvider from 'next-auth/providers/kakao';
 
-
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
 	adapter: PrismaAdapter(prisma),
 	providers: [
 		GoogleProvider({
@@ -21,7 +21,22 @@ export default NextAuth({
 			clientId: process.env.KAKAO_CLIENT_ID || "",
 			clientSecret: process.env.KAKAO_CLIENT_SECRET || "",
 		}),
-	],
+	],	
+	callbacks: {
+    session: ({ session, token }) => ({
+      ...session,
+      user: {
+        ...session.user,
+        id: token.sub,
+      },
+    }),
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.sub = user.id;
+      }
+      return token;
+    },
+	},
 	pages: {
 		signIn: "/auth/login",
 	},
@@ -31,4 +46,6 @@ export default NextAuth({
 		updateAge: 60 * 60 * 2, // 2시간 마다 세션 업데이트
 	},
 	secret: process.env.NEXTAUTH_SECRET, 
-});
+};
+
+export default NextAuth(authOptions);

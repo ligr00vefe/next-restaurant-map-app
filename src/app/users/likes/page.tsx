@@ -1,8 +1,9 @@
 import React from 'react'
+import LikesClient from './LikesClient'
 
 const LikesPage = () => {
   return (
-    <div>LikesPage</div>
+    <LikesClient />
   )
 }
 

@@ -1,5 +1,5 @@
 import * as data from '../src/data/restaurant_data.json';
-import { prisma } from '@/db';
+import { prisma } from "../src/db"; 
 
 async function seedData() {
 	// seed 코드 작성
@@ -15,6 +15,7 @@ async function seedData() {
 		  menu: store?.rprsntv_menu || "",
 		  description: store?.itemcntnts,
 		};
+		
 		const result = await prisma.store.create({
 			data: storeData
 		});

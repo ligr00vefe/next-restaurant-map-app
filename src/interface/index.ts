@@ -9,8 +9,21 @@ export interface IStoreType {
   category?:    string | null;
   menu?:        string | null;
   description?: string | null;
+  likes?: ILikeType[];
 }
 
+export interface ILikeType {
+  id: number;
+  storeId: number;
+  userId: number;
+}
+
+export interface ILikeApiResponse {
+  page?: number;
+  data: ILikeType[];
+  totalPage?: number;
+  totalCount?: number;
+}
 export interface IStoreApiResponse {
   page?: number;
   data: IStoreType[];
@@ -28,8 +41,6 @@ export interface ISearchType {
   q?: string;
   district?: string;
 }
-
-
 
 export interface IStoreAllType {
   uc_seq: number;

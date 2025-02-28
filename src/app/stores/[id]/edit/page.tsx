@@ -1,8 +1,11 @@
 import React from 'react'
+import StoreEditClient from './StoreEditClient'
 
 const StoreEditPage = () => {
   return (
-    <div>StoreEditPage</div>
+    <>
+      <StoreEditClient />
+    </>
   )
 }
 
