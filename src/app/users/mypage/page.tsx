@@ -1,8 +1,9 @@
 import React from 'react'
+import MypageClient from './MypageClient'
 
 const Mypage = () => {
   return (
-    <div>Mypage</div>
+    <MypageClient />
   )
 }
 

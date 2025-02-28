@@ -20,7 +20,7 @@ const StoreNewClient = () => {
 
   return (
     <form 
-      className='px-4 pt-14 pb-8 md:max-w-4xl mx-auto'
+      className='px-4 py-8 md:max-w-4xl mx-auto'
       onSubmit={handleSubmit(async (data) => {
         console.log('store new data: ', data);
         try {

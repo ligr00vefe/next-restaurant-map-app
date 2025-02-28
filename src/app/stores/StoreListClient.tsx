@@ -84,7 +84,7 @@ const StoreListClient = () => {
   }
   
   return (
-    <div className='px-4 md:max-w-4xl mx-auto pt-14 pb-8'>
+    <div className='px-4 md:max-w-4xl mx-auto py-8'>
       {/* 검색창 */}
       <SearchFilter />
       <ul role="list" className='divide-y divide-gray-100'>

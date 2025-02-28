@@ -75,7 +75,7 @@ const StoreDetailClient = () => {
 
   return (
     <>
-      <div className='max-w-5xl mx-auto px-4 pt-14 pb-8'>
+      <div className='max-w-5xl mx-auto px-4 py-8'>
         <div className='md:flex justify-between items-center py-4 md:py-0'>
           <div className="px-4 sm:px-0">
             <h3 className="text-base/7 font-semibold text-gray-900">{store?.name}</h3>
