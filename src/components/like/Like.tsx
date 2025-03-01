@@ -13,7 +13,7 @@ interface ILikeProps {
 }
 
 const Like = ({ storeId, className }: ILikeProps) => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   // console.log('session: ', session);
 
   const fetchStore = async () => {
@@ -47,8 +47,11 @@ const Like = ({ storeId, className }: ILikeProps) => {
       } catch (e) {
         console.log(e);
       }
+    }else if (status === 'unauthenticated') {
+      toast.warn('로그인 후 이용해주세요.');
     }
-  }
+  };
+  
   return (
     <>
       <button 

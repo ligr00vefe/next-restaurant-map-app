@@ -18,6 +18,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   likes         Like[]
+  comments      Comment[]
 }
 
 model Store {
@@ -33,19 +34,34 @@ model Store {
   description String? // itemcntnts
   
   likes       Like[]
+  comments    Comment[]
 }
 
 model Like {
   id          Int      @id   @default(autoincrement())
-	storeId     Int 
 	userId      Int 
+	storeId     Int 
 	createdAt   DateTime @default(now()) 
 
-	store       Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
 	user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+	store       Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
 
   @@index([userId, storeId])
 }
+
+model Comment {
+  id          String      @id   @default(uuid())
+	userId      Int 
+	storeId     Int 
+	body        String? 
+	createdAt   DateTime @default(now()) 
+
+	user        User     @relation(fields: [userId], references: [id])
+	store       Store    @relation(fields: [storeId], references: [id])
+
+  @@index([userId, storeId])
+}
+
 model Account {
   id                            String  @id @default(cuid())
   userId                        Int  @map("user_id")

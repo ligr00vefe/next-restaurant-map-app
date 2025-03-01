@@ -24,19 +24,39 @@ const NavBtn = () => {
         <div className={styles['navbar--mobile']}>
           <ul className={styles['navbar__list--mobile']}>
             <li>
-              <Link href='/map' className={styles['navbar__list--item--mobile']}>맛집 지도</Link>
+              <Link 
+                href='/map' 
+                className={styles['navbar__list--item--mobile']}
+                onClick={() => setIsOpen(false)}
+              >맛집 지도</Link>
             </li>
             <li>
-              <Link href='/stores' className={styles['navbar__list--item--mobile']}>맛집 목록</Link>
+              <Link 
+                href='/stores' 
+                className={styles['navbar__list--item--mobile']}
+                onClick={() => setIsOpen(false)}
+              >맛집 목록</Link>
             </li>
             <li>
-              <Link href='/stores/new' className={styles['navbar__list--item--mobile']}>맛집 등록</Link> 
+              <Link 
+                href='/stores/new' 
+                className={styles['navbar__list--item--mobile']}
+                onClick={() => setIsOpen(false)}
+              >맛집 등록</Link> 
             </li>
             <li>
-              <Link href='/users/likes' className={styles['navbar__list--item--mobile']}>찜한 가게</Link> 
+              <Link 
+                href='/users/likes' 
+                className={styles['navbar__list--item--mobile']}
+                onClick={() => setIsOpen(false)}
+              >찜한 가게</Link> 
             </li>
             <li>
-              <Link href='/users/mypage' className={styles['navbar__list--item--mobile']}>마이페이지</Link> 
+              <Link 
+                href='/users/mypage' 
+                className={styles['navbar__list--item--mobile']}
+                onClick={() => setIsOpen(false)}
+              >마이페이지</Link> 
             </li>
             <li>
               {status === 'authenticated' ? (
