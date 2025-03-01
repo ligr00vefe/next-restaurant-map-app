@@ -51,7 +51,7 @@ const Like = ({ storeId, className }: ILikeProps) => {
       toast.warn('로그인 후 이용해주세요.');
     }
   };
-  
+
   return (
     <>
       <button 
@@ -59,7 +59,7 @@ const Like = ({ storeId, className }: ILikeProps) => {
         onClick={toggleLike}
         className={className}
       >
-        {store?.likes && store?.likes?.length > 0 ? (
+        {status === 'authenticated' && store?.likes && store?.likes?.length > 0 ? (
           <AiFillHeart className='text-red-500 hover:text-red-600 focus:text-red-600' />
         ) : (
           <AiOutlineHeart className='hover:text-red-600 focus:text-red-600' />
