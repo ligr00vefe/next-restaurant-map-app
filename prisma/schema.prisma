@@ -50,7 +50,7 @@ model Like {
 }
 
 model Comment {
-  id          String      @id   @default(uuid())
+  id          Int      @id   @default(autoincrement())
 	userId      Int 
 	storeId     Int 
 	body        String? 

@@ -25,13 +25,6 @@ const NavBtn = () => {
           <ul className={styles['navbar__list--mobile']}>
             <li>
               <Link 
-                href='/map' 
-                className={styles['navbar__list--item--mobile']}
-                onClick={() => setIsOpen(false)}
-              >맛집 지도</Link>
-            </li>
-            <li>
-              <Link 
                 href='/stores' 
                 className={styles['navbar__list--item--mobile']}
                 onClick={() => setIsOpen(false)}

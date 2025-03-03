@@ -12,9 +12,6 @@ const NavItem = () => {
     <>
       <ul>
         <li>
-          <Link href='/map' className={styles['navbar__list--item']}>맛집 지도</Link>
-        </li>
-        <li>
           <Link href='/stores' className={styles['navbar__list--item']}>맛집 목록</Link>
         </li>
         <li>

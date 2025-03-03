@@ -25,6 +25,22 @@ export interface ILikeApiResponse {
   totalPage?: number;
   totalCount?: number;
 }
+
+export interface ICommentType {
+  id: number;
+  storeId: number;
+  userId: number;
+  store?: IStoreType;
+  body: string | null;
+}
+
+export interface ICommentApiResponse {
+  page?: number;
+  data: ICommentType[];
+  totalPage?: number;
+  totalCount?: number;
+}
+
 export interface IStoreApiResponse {
   page?: number;
   data: IStoreType[];
