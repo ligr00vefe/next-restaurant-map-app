@@ -41,7 +41,7 @@ const LikesClient = () => {
             <StoreList store={like.store} i={i} key={i} />                    
         ))}
       </ul>
-      {likes?.totalPage && likes?.totalPage > 0 && <Pagination totalPage={likes?.totalPage} page={page} pathname='/users/likes' />}          
+      <Pagination totalPage={likes?.totalPage} page={page} pathname='/users/likes' />          
     </div>
   )
 }

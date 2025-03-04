@@ -66,7 +66,7 @@ const StoreListClient = () => {
             </li>
         ))}
       </ul>
-      {stores?.totalPage && stores?.totalPage > 0 && <Pagination totalPage={stores?.totalPage} page={page} pathname='/stores_paging' />}    
+      <Pagination totalPage={stores?.totalPage} page={page} pathname='/stores_paging' />    
     </div>
   )
 }

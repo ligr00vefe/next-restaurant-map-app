@@ -34,7 +34,7 @@ const Comments = ({
     queryFn: fetchComments
   });
 
-  console.log('comments: ', comments);
+  // console.log('comments: ', comments);
 
   return (
     <div className='md:max-w-2xl py-8 px-2 mb-20 mx-auto'>
@@ -42,9 +42,7 @@ const Comments = ({
         <CommentForm storeId={storeId} refetch={refetch} />
       )}               
       <CommentList comments={comments} refetch={refetch} />
-      {comments?.totalPage && (
-        <Pagination totalPage={comments?.totalPage} page={page} pathname={`/stores/${storeId}`} />        
-      )}
+      <Pagination totalPage={comments?.totalPage} page={page} pathname={`/stores/${storeId}`} />        
     </div>
   )
 }

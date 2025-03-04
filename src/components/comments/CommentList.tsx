@@ -3,16 +3,19 @@
 import { ICommentApiResponse } from '@/interface';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 import React from 'react'
 import { toast } from 'react-toastify';
 
 interface ICommentListProps {
   comments?: ICommentApiResponse;
+  displayStore?: boolean;
   refetch: () => void;
 }
 
 const CommentList = ({
   comments,
+  displayStore,
   refetch,
 }: ICommentListProps) => {
     const { data: session } = useSession();
@@ -57,9 +60,17 @@ const CommentList = ({
                 <div>{comment?.user?.name ?? '사용자'} | {comment?.user?.email}</div>
               </div>
               <div className='text-xs'>{new Date(comment?.createdAt)?.toLocaleString()}</div>
-              <div className='text-black mt-1 text-base'>
-                {comment.body}
-              </div>
+              <div className='text-black mt-1 text-base'>{comment.body}</div>
+              {displayStore && comment.store && (
+                <div className='mt-2'>
+                  <Link 
+                    href={`/stores/${comment.store.id}`}
+                    className='text-blue-700 hover:text-blue-500 underline font-medium'
+                  >
+                    {comment.store.name}
+                  </Link>
+                </div>
+              )}
             </div>
             <div>
               {comment.userId === session?.user?.id && (
@@ -72,7 +83,7 @@ const CommentList = ({
           </div>
         ))
       ) : (
-        <div className='p-4 border border-gray-200 rounded-md text-sm text-gray-400'>댓글이 없습니다.</div>
+        <div className='p-4 border-0 rounded-md text-sm text-gray-400'>댓글이 없습니다.</div>
       )}
     </div>
   )
