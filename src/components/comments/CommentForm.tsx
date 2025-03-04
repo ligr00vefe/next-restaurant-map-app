@@ -5,9 +5,13 @@ import { toast } from 'react-toastify';
 
 interface ICommentFormProps {
   storeId: number;
+  refetch: () => void;
 }
 
-const CommentForm = ({ storeId }: ICommentFormProps) => {
+const CommentForm = ({ 
+  storeId, 
+  refetch 
+}: ICommentFormProps) => {
   const { 
     register, 
     handleSubmit, 
@@ -23,11 +27,12 @@ const CommentForm = ({ storeId }: ICommentFormProps) => {
           ...data,
           storeId,
         });
-        console.log('result: ', result);
+        // console.log('result: ', result);
 
         if (result.status === 200) {
           toast.success('댓글을 등록했습니다.');
           resetField('body');
+          refetch?.();
         }else {
           toast.error('다시 시도해주세요.');
         }

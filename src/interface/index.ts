@@ -28,10 +28,19 @@ export interface ILikeApiResponse {
 
 export interface ICommentType {
   id: number;
-  storeId: number;
   userId: number;
-  store?: IStoreType;
+  storeId: number;
+  user?: IUserType; 
+  store?: IStoreType;  
   body: string | null;
+  createdAt: Date;
+}
+
+interface IUserType {
+  id: number;
+  email: string | null;
+  name?: string | null;
+  image?: string | null;
 }
 
 export interface ICommentApiResponse {
