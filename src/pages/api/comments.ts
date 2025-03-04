@@ -26,7 +26,7 @@ export default async function handler(
 
   if (req.method === 'POST') {
     // 댓글 생성 로직    
-    if (!session?.user || !id) {
+    if (!session?.user) {
       return res.status(401);
     }
 
@@ -41,7 +41,7 @@ export default async function handler(
     return res.status(200).json(comment);
   } else if (req.method === 'DELETE') {
     // 댓글 삭제 로직
-    if (!session?.user) {
+    if (!session?.user || !id) {
       return res.status(401);      
     }    
 

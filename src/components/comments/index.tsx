@@ -40,7 +40,7 @@ const Comments = ({
       {status === 'authenticated' && (
         <CommentForm storeId={storeId} refetch={refetch} />
       )}               
-      <CommentList comments={comments} />
+      <CommentList comments={comments} refetch={refetch} />
     </div>
   )
 }

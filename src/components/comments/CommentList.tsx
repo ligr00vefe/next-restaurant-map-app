@@ -8,10 +8,12 @@ import { toast } from 'react-toastify';
 
 interface ICommentListProps {
   comments?: ICommentApiResponse;
+  refetch: () => void;
 }
 
 const CommentList = ({
-  comments
+  comments,
+  refetch,
 }: ICommentListProps) => {
     const { data: session } = useSession();
 
@@ -23,6 +25,7 @@ const CommentList = ({
           const result = await axios.delete(`/api/comments?id=${id}`);     
           if (result.status === 200) {
             toast.success('댓글을 삭제했습니다.');
+            refetch?.();
           }else {
             toast.error('다시 시도해주세요.');
           }
