@@ -30,7 +30,7 @@ const MypageClient = () => {
                   alt='프로필 이미지' 
                   width={48} 
                   height={48} 
-                  className='rounded-full'
+                  className='rounded-full w-12 h-12'
                 />
               </dd>
             </div>
