@@ -1,5 +1,6 @@
 'use client';
 
+import CurrentLocationButton from "@/components/map/CurrentLocationButton";
 import Map from "@/components/map/Map";
 import Markers from "@/components/map/Markers";
 import StoreBox from "@/components/map/StoreBox";
@@ -24,6 +25,7 @@ const KakaoMapClient = () => {
       <Map />
       <Markers storeDatas={stores} />
       <StoreBox />
+      <CurrentLocationButton />
     </>
   )
 }

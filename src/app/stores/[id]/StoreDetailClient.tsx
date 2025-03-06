@@ -12,7 +12,7 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 import Like from '@/components/like/Like';
-import Comments from '@/components/comments';
+import Comments from '@/components/comments/Comments';
 
 const StoreDetailClient = () => {
   const router = useRouter();
