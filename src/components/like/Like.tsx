@@ -37,11 +37,13 @@ const Like = ({ storeId, className }: ILikeProps) => {
         const like = await axios.post('/api/likes', {
           storeId: store?.id,
         });
-        
+        console.log('return like: ', like);
         if (like.status === 201) {
-          toast.success('식당을 찜했습니다.');
-        }else {
-          toast.warn('찜을 취소했습니다.');
+          toast.success("식당을 찜했습니다.");
+        } else if (like.data.deleted) {
+          toast.warn("찜을 취소했습니다.");
+        } else {
+          toast.error("알 수 없는 오류 발생");
         }
         refetch();
       } catch (e) {

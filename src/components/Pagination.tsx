@@ -8,7 +8,7 @@ interface IPagenationProps {
 }
 
 const Pagination = ({ totalPage = 0, page, pathname }: IPagenationProps) => {
-  console.log('totalPage', totalPage);
+  // console.log('totalPage: ', totalPage);
   return (
     <div className='py-6 w-full px-10 flex justify-center gap-4 text-black bg-white my-10 flex-wrap'>
       {totalPage <= 10 ? (

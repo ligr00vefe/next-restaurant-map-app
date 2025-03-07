@@ -25,7 +25,7 @@ const LikesClient = () => {
     queryKey: [`likes-${page}`],
     queryFn: fetchLikes,
   });
-  console.log('likes: ', likes);
+  // console.log('likes: ', likes);
 
   if (isError) {
     return <div className='w-full h-screen mx-auth pt-[10%] text-red-500 text-center font-semibold'>다시 시도해주세요.</div>;
