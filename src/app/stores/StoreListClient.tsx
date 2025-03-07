@@ -1,21 +1,18 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import Loading from '@/components/loading/Loading';
 import {IStoreType } from '@/interface';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import Image from 'next/image';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import LoadingBar from '@/components/loading/LoadingBar';
 import SearchFilter from '@/components/search/SearchFilter';
-import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import { searchState } from '@/atom';
 import StoreList from '@/components/store/StoreList';
 
 const StoreListClient = () => {
-  const router = useRouter();
   const ref = useRef<HTMLDivElement | null>(null);
   const pageRef = useIntersectionObserver(ref as React.RefObject<Element>, {});
   const isPageEnd = !!pageRef?.isIntersecting;

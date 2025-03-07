@@ -19,6 +19,7 @@ const LikesClient = () => {
   const { 
     data: likes,
     isError,
+    isSuccess,
     isLoading
   } = useQuery<ILikeApiResponse>({
     queryKey: [`likes-${page}`],
@@ -37,9 +38,13 @@ const LikesClient = () => {
       <ul role='list' className='divide-y divide-gray-100 mt-10'>
         {isLoading
           ? <Loading />
-          : likes?.data?.map((like: ILikeType, i: number) => (
-            <StoreList store={like.store} i={i} key={i} />                    
-        ))}
+          : (likes?.data?.map((like: ILikeType, i: number) => (
+            <StoreList store={like.store} i={i} key={i} />
+          ))
+        )}
+        {isSuccess && !!!likes.data.length && (
+          <div className='p-4 border-0 rounded-md text-sm text-gray-400'>찜한 가게가 없습니다.</div>
+        )}
       </ul>
       <Pagination totalPage={likes?.totalPage} page={page} pathname='/users/likes' />          
     </div>

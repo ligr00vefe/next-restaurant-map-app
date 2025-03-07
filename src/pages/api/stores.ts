@@ -3,7 +3,7 @@ import { IStoreApiResponse, IStoreType } from "@/interface";
 import { prisma } from '@/db';
 import axios from "axios";
 import { getServerSession } from "next-auth";
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 interface IResponseType {
   page?: string;

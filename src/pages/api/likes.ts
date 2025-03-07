@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from '@/db';
 import { getServerSession } from "next-auth";
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { ILikeApiResponse, ILikeType } from "@/interface";
 
 interface IResponseType {
@@ -56,7 +56,11 @@ export default async function handler(
     const { page = "1", limit = "10" }: IResponseType = req.query;
     const pageSize = limit ? parseInt(limit) : 10; 
     const skipPage = parseInt(page) - 1;
-    const count = await prisma.like.count();
+    const count = await prisma.like.count({
+      where: {
+        userId: session.user.id,
+      },
+    });
 
     const likes = await prisma.like.findMany({
       where: {
