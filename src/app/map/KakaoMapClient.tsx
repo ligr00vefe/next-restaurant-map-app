@@ -14,9 +14,14 @@ const KakaoMapClient = () => {
 
   useEffect(() => {
     const fetchStores = async () => {
-      const res = await axios('/api/stores');
-      setStores(res.data);
+      try {
+        const res = await axios('/api/stores');
+        setStores(res.data);
+      } catch (error) {
+        console.error("식당 데이터를 불러오는 중 오류 발생:", error);
+      }
     };
+  
     fetchStores();
   }, []);
 
