@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import MypageClient from './MypageClient'
 
 const Mypage = () => {
   return (
-    <MypageClient />
+    <>
+      <Suspense fallback={<div>로딩 중...</div>}>
+        <MypageClient />      
+      </Suspense>    
+    </>
   )
 }
 

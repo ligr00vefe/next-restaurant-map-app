@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import LikesClient from './LikesClient'
 
 const LikesPage = () => {
   return (
-    <LikesClient />
+    <>
+      <Suspense fallback={<div>로딩 중...</div>}>
+        <LikesClient />      
+      </Suspense>
+    </>
   )
 }
 

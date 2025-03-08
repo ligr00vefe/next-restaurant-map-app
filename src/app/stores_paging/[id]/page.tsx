@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import StoreDetailClient from './StoreDetailClient'
 
 const StoreDetailPage = () => {
 
   return (
-    <StoreDetailClient />
+    <>
+      <Suspense fallback={<div>로딩 중...</div>}>
+        <StoreDetailClient />
+      </Suspense>
+    </>    
   )
 }
 
