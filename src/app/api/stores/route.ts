@@ -4,6 +4,7 @@ import axios from "axios";
 import { getServerSession } from "next-auth";
 import { authOptions } from '@/lib/authOptions';
 
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const page = searchParams.get('page') as string;
