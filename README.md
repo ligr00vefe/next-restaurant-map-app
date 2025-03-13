@@ -98,7 +98,7 @@ vercel
 - [Next-Auth Naver Provider](https://developers.naver.com/main/)
 - [Next-Auth kakao Provider](https://developers.kakao.com/)
 
-🐞 이슈 및 해결 방법
+## 🐞 이슈 및 해결 방법
 
 ⚠️ Next.js, React, Recoil 버전 충돌로 인한 버전 고정 설치 권장
 
